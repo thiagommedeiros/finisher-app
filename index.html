@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div id="loginPanel">
+      <input type="text" id="name" placeholder="Preencha seu nome">
+      <button id="enter" type="button">Entrar</button>
+    </div>
+
+    <div id="statePanel" class="hidden">
+      <ul id="connectedUsers"></ul>
+
+      <button id="stateButton">Finalizado</button>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script>
+      // You can also require other files to run in this process
+      require('./renderer.js')
+    </script>
+  </body>
+</html>
