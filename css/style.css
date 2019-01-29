@@ -25,9 +25,10 @@ body {
 }
 
 .loginPanel input::placeholder {
-  font-size: 15px;
+  font-size: 12px;
 }
 
 .loginPanel button {
   height: 72%;
 }
+

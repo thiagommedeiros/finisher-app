@@ -1,15 +1,15 @@
 // connect the user
-const socket = io('http://localhost:3000')
+const socket = io('https://finisher-server.herokuapp.com/')
 window.userId = '_' + Math.random().toString(36).substr(2, 9)
 
 
-//update users state
+// update users state
 socket.on('usersState', state => {
   console.log('novo estado', state)
 })
 
 
-//selectors
+// selectors
 const loginPanel = document.querySelector('#loginPanel')
 const statePanel = document.querySelector('#statePanel')
 const waitingPanel = document.querySelector('#waitingPanel')
@@ -18,6 +18,7 @@ const enterButton = document.querySelector('#enterButton')
 const finishButton = document.querySelector('#finishButton')
 const clearButton = document.querySelector('#clearButton')
 const usersList = document.querySelector('#usersList')
+const inputName = document.querySelector('#inputName')
 
 
 // admin controls
@@ -40,7 +41,6 @@ socket.on('usersReady', value => {
 
 // users state
 socket.on('usersState', users => {
-  console.log('chegou')
   const usersHTML = users.map(user => `
     <li class="${user.status}">
       <span class="name">${user.name}</span>
@@ -52,9 +52,9 @@ socket.on('usersState', users => {
 })
 
 
-//login button
-enterButton.addEventListener('click', () => {  
-  const name = document.querySelector('#name').value
+// add user
+const addUser = () => {  
+  const name = inputName.value
   
   if (!name) {
     alert('Preencha seu nome corretamente!')
@@ -68,10 +68,17 @@ enterButton.addEventListener('click', () => {
   
   loginPanel.classList.add('hidden')
   statePanel.classList.remove('hidden')
+}
+
+enterButton.addEventListener('click', addUser)
+inputName.addEventListener('keyup', (e) => {
+  if (e.keyCode === 13) {
+    addUser()
+  }
 })
 
 
-//finish button
+// finish button
 finishButton.addEventListener('click', () => {
   statePanel.classList.add('hidden')
   waitingPanel.classList.remove('hidden')

@@ -4,12 +4,14 @@ let mainWindow
 
 const createWindow = () => {
   mainWindow = new BrowserWindow({
-    x:2000,
-    y:0,
+    x: 2000,
+    y: 0,
     width: 200,
     height: 80,
-    frame: false,
+    frame: true,
+    autoHideMenuBar: true,
   })
+  
   mainWindow.loadFile('index.html')
 
   mainWindow.on('closed', () => {
@@ -18,6 +20,8 @@ const createWindow = () => {
 
   mainWindow.setAlwaysOnTop(true, 'floating', 1)
   mainWindow.setVisibleOnAllWorkspaces(true)
+
+  mainWindow.setMenu(null)
 }
 
 app.on('ready', createWindow)
