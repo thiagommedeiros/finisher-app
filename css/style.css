@@ -1,3 +1,33 @@
+body {
+  height: 80vh;
+  display: flex;
+  background-color: lightgreen;
+}
+
 .hidden {
-  display: none;
+  display: none !important;
+}
+
+.loginPanel {
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.loginPanel input {
+  width: 70%;
+  height: 50%;
+  padding: 5px;
+  color: #4c4b4b;
+  font-size: 17px;
+  text-transform: capitalize;
+  outline-color: transparent;
+}
+
+.loginPanel input::placeholder {
+  font-size: 15px;
+}
+
+.loginPanel button {
+  height: 72%;
 }
