@@ -70,11 +70,10 @@ const addUser = () => {
   statePanel.classList.remove('hidden')
 }
 
+// login event
 enterButton.addEventListener('click', addUser)
 inputName.addEventListener('keyup', (e) => {
-  if (e.keyCode === 13) {
-    addUser()
-  }
+  e.keyCode === 13 && addUser()
 })
 
 
