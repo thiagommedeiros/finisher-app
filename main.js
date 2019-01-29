@@ -1,8 +1,4 @@
 const { app, BrowserWindow } = require('electron')
-const io = require('socket.io-client')
-const uuid = require('uuid/v1');
-
-const socket = io('http://localhost:3000')
 
 let mainWindow
 
