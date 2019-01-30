@@ -11,7 +11,7 @@ const createWindow = () => {
     frame: true,
     autoHideMenuBar: true,
   })
-  
+
   mainWindow.loadFile('index.html')
 
   mainWindow.on('closed', () => {

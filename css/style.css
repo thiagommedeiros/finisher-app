@@ -1,7 +1,9 @@
 body {
-  height: 80vh;
+  height: 79vh;
   display: flex;
-  background-color: lightgreen;
+  overflow: hidden;
+  background-color: #38287c;
+  /* background-color: #d03c38; */
 }
 
 .hidden {
@@ -20,6 +22,7 @@ body {
   padding: 5px;
   color: #4c4b4b;
   font-size: 17px;
+  border: 2px solid #952926;
   text-transform: capitalize;
   outline-color: transparent;
 }
@@ -29,6 +32,48 @@ body {
 }
 
 .loginPanel button {
+  background-color: #d03c38;
+  border-color: #952926;
+  color: #fff;
+  font-size: 15px;
   height: 72%;
 }
 
+.finishPanel, .adminPanel {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.finishPanel button, .adminPanel button {
+  outline-color: transparent;
+  background-color: #fff;
+  border-radius: 20px;
+  border-color: red;
+  font-size: 25px;
+  color: #38287c;
+  padding: 7px;
+}
+
+.finishPanel button:hover, .adminPanel button:hover {
+  cursor: pointer;
+}
+
+.finishPanel span, .waitingPanel span, .adminPanel span {
+  color: #efefef;
+  font-family: arial;
+  font-size: 22px;
+}
+
+.waitingPanel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+
+.waitingPanel img {
+  width: 30px;
+}

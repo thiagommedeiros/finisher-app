@@ -3,28 +3,36 @@
   <head>
     <meta charset="UTF-8">
     <title>Finisher</title>
+     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
     <div id="loginPanel" class="loginPanel">
-      <input type="text" id="inputName" placeholder="Preencha seu nome">
+      <input type="text" id="inputName" placeholder="Preencha seu nome" autofocus>
       <button id="enterButton" type="button">Entrar</button>
     </div>
 
-    <div id="statePanel" class="hidden">
-      <button id="finishButton">Finalizar tarefa</button>
+    <div id="statePanel" class="finishPanel hidden">
+      <span>Terminou?</span>
+      <button id="finishButton" class="material-icons">check</button>
     </div>
 
-    <div id="waitingPanel" class="hidden">
-      Aguarde o professor...
+    <div id="waitingPanel" class="waitingPanel hidden">
+      <span>Aguarde</span>
+      <img src="img/loading.gif" alt="loading-gif">
     </div>
 
-    <div id="adminPanel" class="hidden">
+    <div id="adminPanel" class="adminPanel hidden">
+      <button id="studentsButton" class="material-icons">people</button>
+      <!-- <span>12/13</span> -->
+      <button id="clearButton" class="material-icons">replay</button>
+    </div>
+
+    <div id="studentsList" class="hidden">
       <ul id="usersList"></ul>
-      <button id="clearButton">Reiniciar</button>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
       require('./renderer.js')
     </script>

@@ -14,11 +14,13 @@ const loginPanel = document.querySelector('#loginPanel')
 const statePanel = document.querySelector('#statePanel')
 const waitingPanel = document.querySelector('#waitingPanel')
 const adminPanel = document.querySelector('#adminPanel')
-const enterButton = document.querySelector('#enterButton')  
+const enterButton = document.querySelector('#enterButton')
 const finishButton = document.querySelector('#finishButton')
 const clearButton = document.querySelector('#clearButton')
 const usersList = document.querySelector('#usersList')
 const inputName = document.querySelector('#inputName')
+const studentsButton = document.querySelector('#studentsButton')
+const studentsList = document.querySelector('#studentsList')
 
 
 // admin controls
@@ -51,21 +53,20 @@ socket.on('usersState', users => {
   usersList.innerHTML = usersHTML
 })
 
-
 // add user
-const addUser = () => {  
+const addUser = () => {
   const name = inputName.value
-  
+
   if (!name) {
     alert('Preencha seu nome corretamente!')
     return
   }
-    
+
   socket.emit('enter', {
     id: window.userId,
     name,
   })
-  
+
   loginPanel.classList.add('hidden')
   statePanel.classList.remove('hidden')
 }
@@ -82,7 +83,7 @@ finishButton.addEventListener('click', () => {
   statePanel.classList.add('hidden')
   waitingPanel.classList.remove('hidden')
 
-  socket.emit('updateUser', { 
+  socket.emit('updateUser', {
     id: window.userId,
     status: 'finished'
   })
@@ -94,4 +95,10 @@ window.onbeforeunload = () => {
   socket.emit('exit', {
     id: window.userId
   })
+}
+
+// students events
+studentsButton.onclick = () => {
+  adminPanel.classList.add('hidden')
+  studentsList.classList.remove('hidden')
 }
