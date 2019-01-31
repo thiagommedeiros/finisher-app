@@ -60,7 +60,7 @@ body {
   cursor: pointer;
 }
 
-.finishPanel span, .waitingPanel span, .adminPanel span {
+.finishPanel span, .waitingPanel span, .adminPanel span, .adminPanel li {
   color: #efefef;
   font-family: arial;
   font-size: 22px;
@@ -76,4 +76,8 @@ body {
 
 .waitingPanel img {
   width: 30px;
+}
+
+.studentsList li {
+  list-style: none;
 }
