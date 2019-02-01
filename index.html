@@ -12,7 +12,7 @@
       <button id="enterButton" type="button">Entrar</button>
     </div>
 
-    <div id="statePanel" class="finishPanel hidden">
+    <div id="finishPanel" class="finishPanel hidden">
       <span>Terminou?</span>
       <button id="finishButton" class="material-icons">check</button>
     </div>
@@ -23,16 +23,12 @@
     </div>
 
     <div id="adminPanel" class="adminPanel hidden">
-      <button id="studentsButton" class="material-icons">people</button>
-      <!-- <span>12/13</span> -->
-      <button id="clearButton" class="material-icons">replay</button>
+      <div>
+        <button id="clearButton" class="material-icons">replay</button>
+      </div>
+      <ul id="usersList" class="userList"></ul>
     </div>
 
-    <div id="studentsList" class="studentsList hidden">
-      <ul id="usersList">
-
-      </ul>
-    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>

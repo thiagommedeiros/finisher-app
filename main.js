@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron')
 
 let mainWindow
 
@@ -7,7 +7,7 @@ const createWindow = () => {
     x: 2000,
     y: 0,
     width: 200,
-    height: 80,
+    height: 105,
     frame: true,
     autoHideMenuBar: true,
   })
@@ -22,6 +22,10 @@ const createWindow = () => {
   mainWindow.setVisibleOnAllWorkspaces(true)
 
   mainWindow.setMenu(null)
+
+  ipcMain.on('resize-window', (event, arg) => {
+    mainWindow.setSize(200, 480)
+  })
 }
 
 app.on('ready', createWindow)

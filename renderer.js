@@ -1,3 +1,5 @@
+const { ipcRenderer } = require('electron')
+
 // connect the user
 const socket = io('https://finisher-server.herokuapp.com/')
 window.userId = '_' + Math.random().toString(36).substr(2, 9)
@@ -11,22 +13,25 @@ socket.on('usersState', state => {
 
 // selectors
 const loginPanel = document.querySelector('#loginPanel')
-const statePanel = document.querySelector('#statePanel')
+const finishPanel = document.querySelector('#finishPanel')
 const waitingPanel = document.querySelector('#waitingPanel')
 const adminPanel = document.querySelector('#adminPanel')
+
 const enterButton = document.querySelector('#enterButton')
 const finishButton = document.querySelector('#finishButton')
 const clearButton = document.querySelector('#clearButton')
-const usersList = document.querySelector('#usersList')
-const inputName = document.querySelector('#inputName')
 const studentsButton = document.querySelector('#studentsButton')
+
+const inputName = document.querySelector('#inputName')
+const usersList = document.querySelector('#usersList')
 const studentsList = document.querySelector('#studentsList')
 
 
 // admin controls
 socket.on('isAdmin', isAdmin => {
   if (isAdmin) {
-    statePanel.classList.add('hidden')
+    ipcRenderer.send('resize-window')
+    finishPanel.classList.add('hidden')
     adminPanel.classList.remove('hidden')
   }
 })
@@ -37,7 +42,7 @@ clearButton.addEventListener('click', () => {
 
 socket.on('usersReady', value => {
   waitingPanel.classList.add('hidden')
-  statePanel.classList.remove('hidden')
+  finishPanel.classList.remove('hidden')
 })
 
 
@@ -68,7 +73,7 @@ const addUser = () => {
   })
 
   loginPanel.classList.add('hidden')
-  statePanel.classList.remove('hidden')
+  finishPanel.classList.remove('hidden')
 }
 
 // login event
@@ -80,7 +85,7 @@ inputName.addEventListener('keyup', (e) => {
 
 // finish button
 finishButton.addEventListener('click', () => {
-  statePanel.classList.add('hidden')
+  finishPanel.classList.add('hidden')
   waitingPanel.classList.remove('hidden')
 
   socket.emit('updateUser', {

@@ -1,9 +1,16 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
 body {
-  height: 79vh;
   display: flex;
   overflow: hidden;
   background-color: #38287c;
-  /* background-color: #d03c38; */
 }
 
 .hidden {
@@ -12,19 +19,20 @@ body {
 
 .loginPanel {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  border-radius: 10px;
+  margin-top: 10px;
 }
 
 .loginPanel input {
-  width: 70%;
-  height: 50%;
-  padding: 5px;
+  width: 95%;
+  padding: 10px;
   color: #4c4b4b;
   font-size: 17px;
   border: 2px solid #952926;
   text-transform: capitalize;
   outline-color: transparent;
+  box-sizing: border-box;
 }
 
 .loginPanel input::placeholder {
@@ -36,7 +44,14 @@ body {
   border-color: #952926;
   color: #fff;
   font-size: 15px;
-  height: 72%;
+  width: 95%;
+  padding: 10px 0;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.loginPanel button:hover {
+  background-color: #952926;
 }
 
 .finishPanel, .adminPanel {
@@ -44,6 +59,38 @@ body {
   justify-content: space-around;
   align-items: center;
   width: 100%;
+}
+
+.adminPanel {
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.adminPanel .userList {
+  list-style: none;
+  margin: 15px 0 0 0;
+  padding: 0;
+}
+
+.adminPanel .userList span {
+  color: #efefef;
+  font-family: arial;
+  font-size: 11px;
+  font-weight: bold;
+  display: inline-block;
+}
+
+.adminPanel .userList .name {
+  width: 100px;
+}
+
+.adminPanel .userList li.ready .status {
+  color: #7e6bd1;
+}
+
+.adminPanel .userList li.finished .status {
+  color: rgb(75, 197, 75);
 }
 
 .finishPanel button, .adminPanel button {
@@ -60,7 +107,7 @@ body {
   cursor: pointer;
 }
 
-.finishPanel span, .waitingPanel span, .adminPanel span, .adminPanel li {
+.finishPanel span, .waitingPanel span {
   color: #efefef;
   font-family: arial;
   font-size: 22px;
@@ -78,6 +125,3 @@ body {
   width: 30px;
 }
 
-.studentsList li {
-  list-style: none;
-}
