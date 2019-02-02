@@ -1,23 +1,21 @@
 {
-  "name": "electron-quick-start",
+  "name": "finisher-app",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "Simple app to use in the classroom to allow the teachers to check which students have completed the tasks.",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package-linux": "electron-packager . --platform linux --arch x64 --out=release-builds",
+    "linux-installer": "electron-installer-debian --src release-builds/finisher-app-linux-x64/ --dest release-builds/installers/ --arch amd64",
+    "build": "npm run package-linux && npm run linux-installer"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
-  "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
-  ],
-  "author": "GitHub",
-  "license": "CC0-1.0",
+  "repository": "https://github.com/thiagommedeiros/finisher-app",
+  "author": "Thiago M. Medeiros",
+  "license": "MIT",
   "devDependencies": {
-    "electron": "^4.0.2"
+    "electron": "^4.0.2",
+    "electron-installer-debian": "^1.1.0",
+    "electron-packager": "^13.0.1"
   },
   "dependencies": {
     "socket.io-client": "^2.2.0",
