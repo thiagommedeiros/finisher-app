@@ -116,12 +116,11 @@ body {
 .waitingPanel {
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   width: 100%;
 }
 
 .waitingPanel img {
-  width: 30px;
+  width: 40px;
 }
-
