@@ -1,7 +1,7 @@
 const { ipcRenderer } = require('electron')
 
 // connect the user
-const env = ''
+const env = 'prod'
 
 const url = env === 'prod'
   ? 'https://finisher-server.herokuapp.com/' 
