@@ -1,18 +1,18 @@
 const { ipcRenderer } = require('electron')
 
 // connect the user
-const socket = io('https://finisher-server.herokuapp.com/')
+const env = ''
+
+const url = env === 'prod'
+  ? 'https://finisher-server.herokuapp.com/' 
+  : 'http://localhost:8888'
+
+const socket = io(url)
 window.userId = '_' + Math.random().toString(36).substr(2, 9)
 
-
-// update users state
-socket.on('usersState', state => {
-  console.log('novo estado', state)
-})
-
+let isAdmin = false
 
 // selectors
-const loginPanel = document.querySelector('#loginPanel')
 const finishPanel = document.querySelector('#finishPanel')
 const waitingPanel = document.querySelector('#waitingPanel')
 const adminPanel = document.querySelector('#adminPanel')
@@ -20,28 +20,25 @@ const adminPanel = document.querySelector('#adminPanel')
 const enterButton = document.querySelector('#enterButton')
 const finishButton = document.querySelector('#finishButton')
 const clearButton = document.querySelector('#clearButton')
-const studentsButton = document.querySelector('#studentsButton')
 
 const inputName = document.querySelector('#inputName')
 const usersList = document.querySelector('#usersList')
-const studentsList = document.querySelector('#studentsList')
+
+const panels = document.querySelectorAll('.panel')
+
+const hideAllPanels = () => 
+  panels.forEach(panel => panel.classList.add('hidden'))
 
 
 // admin controls
-socket.on('isAdmin', isAdmin => {
-  if (isAdmin) {
-    ipcRenderer.send('resize-window')
-    finishPanel.classList.add('hidden')
-    adminPanel.classList.remove('hidden')
-  }
-})
-
 clearButton.addEventListener('click', () => {
   socket.emit('clearUsersStatus')
 })
 
 socket.on('usersReady', value => {
-  waitingPanel.classList.add('hidden')
+  if (isAdmin) return
+  
+  hideAllPanels()
   finishPanel.classList.remove('hidden')
 })
 
@@ -67,13 +64,20 @@ const addUser = () => {
     return
   }
 
+  hideAllPanels()
+
   socket.emit('enter', {
     id: window.userId,
     name,
   })
-
-  loginPanel.classList.add('hidden')
-  finishPanel.classList.remove('hidden')
+  
+  if (name === 'Professor') {
+    isAdmin = true
+    ipcRenderer.send('resize-window')
+    adminPanel.classList.remove('hidden')
+  } else {
+    waitingPanel.classList.remove('hidden')
+  }
 }
 
 // login event
@@ -85,7 +89,7 @@ inputName.addEventListener('keyup', (e) => {
 
 // finish button
 finishButton.addEventListener('click', () => {
-  finishPanel.classList.add('hidden')
+  hideAllPanels()
   waitingPanel.classList.remove('hidden')
 
   socket.emit('updateUser', {
@@ -100,10 +104,4 @@ window.onbeforeunload = () => {
   socket.emit('exit', {
     id: window.userId
   })
-}
-
-// students events
-studentsButton.onclick = () => {
-  adminPanel.classList.add('hidden')
-  studentsList.classList.remove('hidden')
 }
